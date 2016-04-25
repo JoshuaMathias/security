@@ -1,0 +1,61 @@
+Midterm Study
+
+Crypto goals: 
+Access control: authorization and authentication
+Confidentiality
+Integrity
+Non-repudiation
+
+Defense in depth: layers of security
+Security minded
+Use public algorithms
+Kirckhoff's principle: Security by secrecy of keys, not of algorithm.
+
+Certificate authority (CA) - Issuer of certificates
+	Certificate practice statement (CPS) - How certificates are issued.
+	Registration authority (RA) - Identifies/verifies certificates
+	Trusted third party (TTA)
+Expiration
+Certificate revocation list (CRL)
+Relying party
+Public Key Infrastructure (PKI)
+	Needed to recognize which public key belongs to whom.
+
+Steps for certificate verification:
+Integrity
+Expiration
+Revocation
+Usage constraints
+Ownership
+
+Strong symmetric encryption:
+Strong algorithm
+Safe key exchange/storage
+
+GF: ax^7+bx^6+cx^5+dx^4+ex^3+fx^2+gx^1+h=abcdefgh
+
+Block ciphers:
+ECB (electonic codebook): All separate blocks. Can be parallelized. Just put the plaintext through the encryption. Flipping a bit should only change one block.
+
+CBC (Cipher Block Chaining): Use cipher text as feedback. xor plaintext with IV before encryption. Flipping a bit should make it completely different.
+In decryption, flipping a bit completely changes first block, one bit in next, and nothing in subsequent blocks. Decryption is parallel, encryption not.
+
+Stream:
+CTR (counter): Independent blocks. The IV has an incrementing counter for each block.
+	Flipping a bit for both encryption and decryption only flips one bit for the current block.
+CFB (Cipher feedback mode): Use feedback (after xor with plaintext) from previous block as the IV for the next block. Flipping a bit in the encryption changes one bit in current block and everything in subsequent blocks. Flipping a bit in decryption changes one bit in the current block, everything in the next block, and nothing in the next blocks (we already have the cipher text).
+OFB (output feedback mode): Use output of encryption as feedback for next IV. Change a bit in the encryption and the decryption only changes one bit in the current block.
+
+6 properties of an ideal hash:
+Variable length input
+Fixed length
+Fast
+one way - given h can't get x from h(x)
+Weak Collision 
+Strong collision
+
+Types of attacks:
+Collision attack (weak collision) - 2^n - Find something that has the same hash.
+Birthday attack -Randomly create variations, store hashes, and find two that have the same hash. - 2^(n/2)
+
+CBC: Cipher block chaining

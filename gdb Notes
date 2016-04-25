@@ -1,0 +1,41 @@
+gdb Notes
+
+gdb examine_stack
+list 1
+break 41
+disas main
+run
+To see the stack: x/8xw $esp or x/4xw $esp
+bt (backtrace of stack)
+info variables
+info locals
+jump *main+1
+jump +1
+
+What is considered the entire stack activation frame?
+
+x/1sb 0x80ae410
+
+Show all of strings: set print elements 0
+set print repeats 0
+
+rsp: points to top of current stack frame
+rbp: points to base of current stop frame (base pointer)
+
+Phase 1:
+   0x0000000000400f91 <+4>:	mov    $0x402750,%esi
+   0x0000000000400f96 <+9>:	callq  0x401450 <strings_not_equal>
+
+x/1sb 0x402750
+
+Phase 2:
+   0x0000000000400fab <+2>:	sub    $0x28,%rsp
+   0x0000000000400faf <+6>:	mov    %fs:0x28,%rax
+   0x0000000000400fb8 <+15>:	mov    %rax,0x18(%rsp)
+   0x0000000000400fbd <+20>:	xor    %eax,%eax
+   0x0000000000400fbf <+22>:	mov    %rsp,%rsi
+   0x0000000000400fc2 <+25>:	callq  0x401755 <read_six_numbers>
+   0x0000000000400fc7 <+30>:	cmpl   $0x1,(%rsp)
+   0x0000000000400fcb <+34>:	je     0x400fed <phase_2+68>
+
+(%rsp)
